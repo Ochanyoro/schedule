@@ -138,6 +138,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+MEDIA_URL = '/media/'
+
 
 # ロギング設定
 LOGGING = {
@@ -220,3 +222,6 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # デフォルトのメール送信元を設定
 DEFAULT_FROM_EMAIL = 'wadaoo022@gmail.com'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
