@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     #manage_scheduleを入れる
     'manage_schedule.apps.ManageScheduleConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
