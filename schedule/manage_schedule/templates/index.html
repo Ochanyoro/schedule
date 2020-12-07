@@ -1,11 +1,58 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>トップページ</title>
-</head>
+{% extends 'base.html' %}
+{% load static %}
 
-<body>
-  <h1>Hello</h1>
-</body>
-</html>
+{% block title %}Webでスケジュールの管理ができる | Scheler {% endblock %}
+
+{% block header%}
+<header class="masthead text-center text-white">
+  <div class="masthead-content">
+    <div class="container">
+      <h1 class="masthead-heading mb-0">Scheler</h1>
+      <h2 class="masthead-subheading mb-0">[個人&グループOK]スケジュール管理サイト</h2>
+      <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">LOG IN</a>
+    </div>
+  </div>
+  <div class="bg-circle-1 bg-circle"></div>
+  <div class="bg-circle-2 bg-circle"></div>
+  <div class="bg-circle-3 bg-circle"></div>
+  <div class="bg-circle-4 bg-circle"></div>
+</header>
+{% endblock %}
+
+{% block contents %}
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 order-lg-2">
+        <div class="p-5">
+          <img class="img-fluid rounded-circle" src="{% static 'img/private.jpg' %}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <div class="p-5">
+          <h2 class="display-4">Private Schedule</h2>
+          <p>個人用のスケジュール帳 | web上で作成/編集/削除が可能</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="p-5">
+          <img class="img-fluid rounded-circle" src="{% static 'img/group.jpg' %}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="p-5">
+          <h2 class="display-4">Group Schedule</h2>
+          <p>グループ用のスケジュール帳 | group内の人のスケジュールを確認できる</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
