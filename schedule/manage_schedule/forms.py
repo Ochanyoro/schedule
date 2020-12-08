@@ -1,6 +1,8 @@
 from django import forms
+import bootstrap_datepicker_plus as datetimepicker
 from django.core.mail import EmailMessage
 
+from .models import Schedule
 
 class InquiryForm(forms.Form):
     name = forms.CharField(label='お名前', max_length=30)
@@ -41,3 +43,104 @@ class InquiryForm(forms.Form):
 
         message = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list)
         message.send()
+
+"""
+class ScheduleCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Schedule
+        fields = ('sample_1', 'sample_2', 'sample_3', 'sample_4_start', 'sample_4_end')
+        widgets = {
+            'sample_1': datetimepicker.DatePickerInput(
+                format='%Y-%m-%d',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ),
+
+            'sample_2': datetimepicker.DateTimePickerInput(
+                format='%Y-%m-%d %H:%M:%S',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ),
+
+            'sample_3': datetimepicker.TimePickerInput(
+                format='%H:%M:%S',
+                options={
+                    'locale': 'ja',
+                }
+
+            ),
+
+            'sample_4_start': datetimepicker.DatePickerInput(
+                format='%Y-%m-%d',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ).start_of('期間'),
+
+            'sample_4_end': datetimepicker.DatePickerInput(
+                format='%Y-%m-%d',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ).end_of('期間'),
+        }
+
+"""
+
+class ScheduleCreateForm(forms.ModelForm):
+    class Meta:
+        model = Schedule
+        fields = ('title', 'content', 'photo1', 'photo2','sample_1','sample_2','sample_3','sample_4_start','sample_4_end' )
+        widgets = {
+            'sample_1': datetimepicker.DatePickerInput(
+                format='%Y-%m-%d',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ),
+
+            'sample_2': datetimepicker.DateTimePickerInput(
+                format='%Y-%m-%d %H:%M:%S',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ),
+
+            'sample_3': datetimepicker.TimePickerInput(
+                format='%H:%M:%S',
+                options={
+                    'locale': 'ja',
+                }
+
+            ),
+
+            'sample_4_start': datetimepicker.DatePickerInput(
+                format='%Y-%m-%d',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ).start_of('期間'),
+
+            'sample_4_end': datetimepicker.DatePickerInput(
+                format='%Y-%m-%d',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            ).end_of('期間'),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
