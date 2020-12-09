@@ -43,31 +43,3 @@ class InquiryForm(forms.Form):
 
         message = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list)
         message.send()
-
-class ScheduleCreateForm(forms.ModelForm):
-    class Meta:
-        model = Schedule
-        fields = ('title', 'content', 'photo1', 'photo2','schedule_start','schedule_end' )
-
-        widgets = {
-            'schedule_start': datetimepicker.DatePickerInput(
-                format='%Y-%m-%d %H:%M',
-                options={
-                    'locale': 'ja',
-                    'dayViewHeaderFormat': 'YYYY年 MMMM',
-                }
-            ).start_of('期間'),
-
-            'schedule_end': datetimepicker.DatePickerInput(
-                format='%Y-%m-%d %H:%M',
-                options={
-                    'locale': 'ja',
-                    'dayViewHeaderFormat': 'YYYY年 MMMM',
-                }
-            ).end_of('期間'),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'

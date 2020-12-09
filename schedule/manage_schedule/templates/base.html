@@ -16,7 +16,7 @@
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-    
+
     <!-- Custom styles for this template -->
     <link href="{% static 'css/one-page-wonder.min.css' %}" rel="stylesheet">
 
@@ -28,25 +28,41 @@
   <body>
 	<div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-          <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <a class="navbar-brand" href="{% url 'manage_schedule:index' %}">Scheler</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item {% block active_inquiry %}{% endblock %}">
+            <ul class="navbar-nav mr-auto">
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manage_schedule:month' %}">月間カレンダー</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">週間カレンダー</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">スケジュール付き月間カレンダー</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">スケジュール付き週間カレンダー</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">登録機能付き月間・週間カレンダー</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">一括登録付き月間カレンダー</a>
+              </li>
+              {% endif %}
+            </ul>
+            <p>☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆<p>
+            <ul class='navbar-nav ml-auto'>
+              <li class="nav-item {% block active_inquiry %}{% endblock %}">
                   <a class="nav-link" href="{% url 'manage_schedule:inquiry'%}">INQUIRY</a>
-                </li>
-                {% if user.is_authenticated %}
-                  <li class="nav-item {% block active_diary_list %}{% endblock %}">
-                      <a class="nav-link" href="{% url 'manage_schedule:schedule_list' %}">DIARY LIST</a>
-                  </li>
-                {% endif %}
-              </ul>
-              <ul class="navbar-nav ml-auto">
-                {% if user.is_authenticated %}
+              </li>
+              {% if user.is_authenticated %}
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
                   </li>
@@ -58,10 +74,10 @@
                       <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
                   </li>
                 {% endif %}
-              </ul>
-            </div>
+            </ur>
           </div>
         </nav>
+
 
         {% block header%}{% endblock %}
 
@@ -92,6 +108,7 @@
         </footer>
 
         <!-- Bootstrap core JavaScript -->
+
         <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
         <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   	</div>
