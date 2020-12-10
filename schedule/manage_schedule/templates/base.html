@@ -38,19 +38,13 @@
             <ul class="navbar-nav mr-auto">
               {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'manage_schedule:month' %}">月間カレンダー</a>
+                <a class="nav-link" href="{% url 'manage_schedule:week_with_schedule' %}">スケジュール付き月間カレンダー</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">週間カレンダー</a>
+                <a class="nav-link" href="{% url 'manage_schedule:month_with_schedule' %}">スケジュール付き週間カレンダー</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">スケジュール付き月間カレンダー</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">スケジュール付き週間カレンダー</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">登録機能付き月間・週間カレンダー</a>
+                <a class="nav-link" href="{% url 'manage_schedule:mycalendar'%}">登録機能付き月間・週間カレンダー</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">一括登録付き月間カレンダー</a>
@@ -111,6 +105,7 @@
 
         <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
         <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        {% block extrajs %}{% endblock %}
   	</div>
   </body>
 

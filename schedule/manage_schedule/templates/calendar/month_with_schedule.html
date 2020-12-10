@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% endblock %}
+
+{% block contents %}
+    <style>
+        table {
+            table-layout: fixed;
+        }
+
+        td > div {
+            height: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+    </style>
+
+    <div class="container mt-3">
+      <div class='my-div-style'>
+    <a href="{% url 'manage_schedule:month_with_schedule' month_previous.year month_previous.month %}">前月</a>
+    {{ month_current | date:"Y年m月" }}
+    <a href="{% url 'manage_schedule:month_with_schedule' month_next.year month_next.month %}">次月</a>
+    <table class="table">
+        <thead>
+        <tr>
+            {% for w in week_names %}
+                <th>{{ w }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for week_day_schedles in month_day_schedules %}
+            <tr>
+                {% for day, schedules in week_day_schedles.items %}
+                    {% if now == day %}
+                        <td class="table-success">
+                            {% else %}
+                        <td>
+                    {% endif %}
+
+                <div>
+                    {% if month_current.month != day.month %}
+                        {{ day | date:"m/d" }}
+                    {% else %}
+                        {{ day.day }}
+                    {% endif %}
+
+                    {% for schedule in schedules %}
+                        <p>{{ schedule.summary }}</p>
+                    {% endfor %}
+                </div>
+                </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+</div>
+</div>
+{% endblock %}

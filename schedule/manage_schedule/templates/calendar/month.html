@@ -1,46 +1,35 @@
-{% extends 'base.html' %}
-{% block head %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-{% endblock %}
 
-{% block contents %}
-<div class="container mt-3">
-  <div class='my-div-style'>
     <a href="{% url 'manage_schedule:month' month_previous.year month_previous.month %}">前月</a>
     {{ month_current | date:"Y年m月" }}
     <a href="{% url 'manage_schedule:month' month_next.year month_next.month %}">次月</a>
 
-    <table class="table">
-        <thead>
+    <table class="table" style="table-layout: fixed;">
+    <thead>
+    <tr>
+        {% for w in week_names %}
+            <th>{{ w }}</th>
+        {% endfor %}
+    </tr>
+    </thead
+    <tbody>
+    {% for week in month_days %}
         <tr>
-            {% for w in week_names %}
-                <th>{{ w }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for week in month_days %}
-            <tr>
-                {% for day in week %}
-                    {% if now == day %}
-                        <td class="table-success">
-                            {% else %}
-                        <td>
-                    {% endif %}
-
-                {% if month_current.month != day.month %}
-                    {{ day | date:"m/d" }}
+            {% for day in week %}
+                {% if now == day %}
+                    <td class="table-success">
                 {% else %}
-                    {{ day.day }}
+                    <td>
                 {% endif %}
 
+                <a href="{% url 'manage_schedule:mycalendar' day.year day.month day.day %}">{{ day.day }}</a>
                 </td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -51,6 +40,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-</div>
-</div>
-{% endblock %}

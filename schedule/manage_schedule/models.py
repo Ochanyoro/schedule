@@ -14,6 +14,8 @@ class Schedule(models.Model):
     end_time = models.TimeField('終了時間', default=datetime.time(7, 0, 0))
     date = models.DateField('日付')
     created_at = models.DateTimeField('作成日', default=timezone.now)
+    private_number = models.CharField('他の人に公開用のnumber',max_length=20)
+    group_number = models.CharField('グループ用のパスワード',max_length=20)
 
     class Meta:
         verbose_name_plural = "Schedule"
