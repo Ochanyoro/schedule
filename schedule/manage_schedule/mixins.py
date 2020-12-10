@@ -115,6 +115,7 @@ class WeekWithScheduleMixin(WeekCalendarMixin):
         }
         # 例えば、Schedule.objects.filter(date__range=(1日, 31日)) になる
         queryset = self.model.objects.filter(**lookup)
+        print(queryset)
 
         # {1日のdatetime: 1日のスケジュール全て, 2日のdatetime: 2日の全て...}のような辞書を作る
         day_schedules = {day: [] for day in days}

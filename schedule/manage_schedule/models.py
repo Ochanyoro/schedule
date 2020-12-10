@@ -7,7 +7,7 @@ from django.utils import timezone
 class Schedule(models.Model):
     """スケジュール管理モデル"""
 
-    user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
+    user = models.ForeignKey(CustomUser,verbose_name='ユーザー',on_delete=models.PROTECT)
     summary = models.CharField('概要', max_length=50)
     description = models.TextField('詳細な説明', blank=True)
     start_time = models.TimeField('開始時間', default=datetime.time(7, 0, 0))
@@ -15,7 +15,7 @@ class Schedule(models.Model):
     date = models.DateField('日付')
     created_at = models.DateTimeField('作成日', default=timezone.now)
     private_number = models.CharField('他の人に公開用のnumber',max_length=20)
-    group_number = models.CharField('グループ用のパスワード',max_length=20)
+    group_number = models.CharField('グループ用のnumber',max_length=20)
 
     class Meta:
         verbose_name_plural = "Schedule"

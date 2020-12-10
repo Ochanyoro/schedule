@@ -36,7 +36,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <a class="navbar-brand" href="{% url 'manage_schedule:index' %}">Scheler</a>
             <ul class="navbar-nav mr-auto">
-              {% if user.is_authenticated %}
+              <!--{% if user.is_authenticated %}-->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'manage_schedule:week_with_schedule' %}">スケジュール付き月間カレンダー</a>
               </li>
@@ -49,7 +49,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">一括登録付き月間カレンダー</a>
               </li>
-              {% endif %}
+              <!--{% endif %}-->
             </ul>
             <p>☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆<p>
             <ul class='navbar-nav ml-auto'>

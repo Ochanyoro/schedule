@@ -50,7 +50,7 @@ class BS4ScheduleForm(forms.ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ('summary', 'description', 'start_time', 'end_time')
+        fields = ('summary', 'description', 'start_time', 'end_time','private_number','group_number')
         widgets = {
             'summary': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -64,6 +64,13 @@ class BS4ScheduleForm(forms.ModelForm):
             'end_time': forms.TextInput(attrs={
                 'class': 'form-control',
             }),
+            'private_number': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'group_number': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+
         }
 
     def clean_end_time(self):
