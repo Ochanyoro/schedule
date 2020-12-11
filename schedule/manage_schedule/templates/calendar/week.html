@@ -27,8 +27,6 @@
         {% for schedules in week_day_schedules.values %}
             <td>
                 {% for s in schedules %}
-                    {{ s.private_number }}
-                    {{ s.group_number }}
                     {{ s.start_time }} - {{ s.end_time }}<br>
                     {{ s.summary }}<br>
                     {{ s.description | linebreaks }}
