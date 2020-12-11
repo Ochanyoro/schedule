@@ -3,6 +3,20 @@ import bootstrap_datepicker_plus as datetimepicker
 from django.core.mail import EmailMessage
 
 from .models import Schedule
+from password import *
+
+class ManagementForm(forms.Form):
+    management_p = forms.CharField(label = 'パスワード',max_length=50)
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+
+        self.fields['management_p'].widget.attrs['placeholder'] = '管理のためのパスワードを入力してください'
+        self.fields['management_p'].widget.attrs['class'] = 'form-control col-9'
+
+    def clean_password(self):
+        management_p =self.cleaned_data['management_p']
+        return management_p
 
 class InquiryForm(forms.Form):
     name = forms.CharField(label='お名前', max_length=30)
@@ -13,8 +27,8 @@ class InquiryForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['name'].widget.attrs['class'] = 'form-control col-9'
         self.fields['name'].widget.attrs['placeholder'] = 'お名前をここに入力してください。'
+        self.fields['name'].widget.attrs['class'] = 'form-control col-9'
 
         self.fields['email'].widget.attrs['class'] = 'form-control col-11'
         self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスをここに入力してください。'

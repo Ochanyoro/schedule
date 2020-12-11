@@ -10,8 +10,11 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import InquiryForm
+from .forms import InquiryForm,ManagementForm
 from .models import Schedule
+from password import *
+from django.shortcuts import render
+
 
 logger = logging.getLogger(__name__)
 # Create your views here.
@@ -105,3 +108,15 @@ class MyCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, generi
         schedule.date = date
         schedule.save()
         return redirect('manage_schedule:mycalendar', year=date.year, month=date.month, day=date.day)
+
+class ManagementView(generic.FormView):
+    template_name = 'management/management.html'
+    form_class = ManagementForm
+
+    def form_valid(self,form):
+        management_p =form.clean_password()
+        if management_p != edit_password:
+            messages.success(self.request,'パスワードが違います')
+            return redirect('manage_schedule:management')
+
+        return redirect('manage_schedule:mycalendar')

@@ -29,6 +29,8 @@ urlpatterns = [
     path(
         'mycalendar/<int:year>/<int:month>/<int:day>/', views.MyCalendar.as_view(), name='mycalendar'
     ),
+
+    path('management/',views.ManagementView.as_view(),name='management'),
 ]
 
 
