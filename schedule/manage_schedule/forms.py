@@ -14,8 +14,12 @@ class ManagementForm(forms.Form):
         self.fields['management_p'].widget.attrs['placeholder'] = '管理のためのパスワードを入力してください'
         self.fields['management_p'].widget.attrs['class'] = 'form-control col-9'
 
-    def clean_password(self):
+    def clean_management_p(self):
         management_p =self.cleaned_data['management_p']
+        if management_p != edit_password:
+            raise forms.ValidationError(
+                'パスワードが正しくありません'
+            )
         return management_p
 
 class InquiryForm(forms.Form):

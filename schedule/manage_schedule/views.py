@@ -112,7 +112,13 @@ class MyCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, generi
 class ManagementView(generic.FormView):
     template_name = 'management/management.html'
     form_class = ManagementForm
+    success_url = reverse_lazy('manage_schedule:mycalendar')
 
+    def form_valid(self,form):
+        return super().form_valid(form)
+
+
+    """
     def form_valid(self,form):
         management_p =form.clean_password()
         if management_p != edit_password:
@@ -120,3 +126,4 @@ class ManagementView(generic.FormView):
             return redirect('manage_schedule:management')
 
         return redirect('manage_schedule:mycalendar')
+    """
